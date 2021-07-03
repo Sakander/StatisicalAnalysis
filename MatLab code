@@ -1,0 +1,44 @@
+clear all
+x=[75.2	141	202.7	222.6	271.1	277.1	275.1	310.5	296	289.9	319.2	323	301.2	348	335	336.3	336.9	296.7	375.6	366	393.3	221.3];
+a1=mean(x); % Mean of x
+y=[24	57	91	90	125	124	126	123	152	151	152	177	178	159	158	158	159	204	185	185	186	117
+];
+a2=mean(y);   % Mean of y
+for i=1:length(x)
+a3(i)=x(i)-a1;
+a4(i)=y(i)-a2;
+end 
+
+d1=[];
+for i=1:length(x)
+    d1(i)=(x(i)-a1)^2;
+end 
+s1=sum(d1);
+vx=s1/(length(x)-1); % variance of x
+
+d2=[];
+for i=1:length(y)
+    d2(i)=(y(i)-a2)^2;
+end 
+s2=sum(d2);
+vy=s2/(length(y)-1); % variance of y 
+
+d3=[];
+for i=1:length(x)
+    d3(i)=(a3(i))*(a4(i)); 
+end 
+s3=sum(d3);
+cov=s3/(length(x)-1); %covariance of x and y
+corr=cov/(sqrt(vx*vy)) % correlation 
+scatter(x,y,'*','r');  % scatter diagram
+for i=1:length(x)
+    E(i)=1*x(i)+8.8;
+    EE(i)=(y(i)-E(i))^2;
+    EV(i)=(E(i)-a2)^2;
+    TV(i)=(y(i)-a2)^2;
+end
+EEEE=sum(EV);
+TE=sum(TV);
+SEE=sqrt((sum(EE))/(length(x)-2)); % Standard error of  estimate
+CODD=(corr)^2; % coefficient of determination
+COD=(sum(EV))/sum(TV); % coefficient of determination 
